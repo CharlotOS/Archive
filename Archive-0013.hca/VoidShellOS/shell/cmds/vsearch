@@ -1,0 +1,26 @@
+#!/bin/bash
+# vsearch - simple duckduckgo search in terminal
+# lol this one scrapes the html but doesnt parse it well yet
+# probs gonna break if ddg changes layout or w/e
+
+query="$*"
+if [[ -z "$query" ]]; then
+    echo "u gotta say what u wanna search for, duh"
+    exit 1
+fi
+
+echo "searchin duckduckgo for: $query ..."
+sleep 1
+
+# Using curl to get raw html (very basic, no json API)
+result=$(curl -s "https://duckduckgo.com/html/?q=$(echo $query | sed 's/ /+/g')")
+
+if [[ -z "$result" ]]; then
+    echo "no results? net probs or ddg changed smth"
+    exit 1
+fi
+
+# crude parsing: show lines with result links (very fragile)
+echo "$result" | grep -oP '(?<=<a class="result__a" href=").*?(?=")' | head -10
+
+echo "done, try openin links in browser (not here lol)"

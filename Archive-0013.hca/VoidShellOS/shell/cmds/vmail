@@ -1,0 +1,20 @@
+#!/bin/bash
+# vmail - stupid simple cli mail sender
+# gotta have msmtp configured or smth else for real mail sending lol
+
+recipient="$1"
+subject="$2"
+shift 2
+body="$*"
+
+if [[ -z "$recipient" || -z "$subject" ]]; then
+    echo "usage: vmail <to> <subject> <body>"
+    exit 1
+fi
+
+echo -e "Subject: $subject\n\n$body" | msmtp "$recipient"
+if [[ $? -eq 0 ]]; then
+    echo "mail sent to $recipient"
+else
+    echo "mail failed, prob bad config"
+fi

@@ -2,18 +2,21 @@ VoidShellOS/
 ├── boot/
 │   └── init.sh
 ├── etc/
-│   └── motd
-├── shell/
-│   ├── main.sh
-│   └── cmds/
-│       ├── vsearch
-│       ├── voidscan
-│       ├── vnet
-│       ├── dumpsec
-│       ├── psimgr
-│       ├── uplink
-│       └── help
-├── home/
-├── tmp/
-└── var/
-    └── log/
+│   ├── motd
+|   └── user.db
+├── packages/
+|   └── preinstall/
+|       └──git_setup.sh
+└── shell/
+    ├── main.sh
+    ├── login.sh
+    └── cmds/
+        ├── calc
+        ├── touch
+        ├── cat
+        ├── uplink
+        ├── vsearch
+        ├── voidscan
+        ├── psimgr
+        ├── uplink
+        └── help

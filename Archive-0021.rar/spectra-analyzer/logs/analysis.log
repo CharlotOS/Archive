@@ -1,0 +1,12 @@
+[2023-05-25 14:00:00] app started
+[2023-05-25 14:00:41] run_analysis started
+[2023-05-25 14:02:22] diag_root mode triggered
+[2023-05-25 14:02:03] diag_root: crash handled sucessfully
+[2023-05-25 14:04:03] diag_root: unexpected error, code: 8 alpha
+[2023-05-25 14:04:03] diag_root: terminating the task...
+[2023-05-25 14:04:54] app ended
+[2023-06-31 10:00:00] app started with errors
+[2023-06-31 10:00:00] terminating session...
+[2023-06-31 10:00:08] failed to terminate session, code: 8 aplha
+[2023-06-31 10:01:12] retrying to terminate session...
+[2023-06-31 10:02:34] app ended

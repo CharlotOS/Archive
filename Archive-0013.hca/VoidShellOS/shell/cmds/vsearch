@@ -22,7 +22,7 @@ fi
 
 # parse results titles & links crudely
 echo "top results:"
-echo "$html" | grep -oP '(?<=<a class="result__a" href=").*?(?=")' | head -10 | nl -w2 -s'. '
+echo "$html" | grep -oP '(?<=<a class="result__a" href=").*?(?=")' | head -10 | tee /tmp/vsearch_results | nl -w2 -s'. '
 
 echo ""
 echo "use 'vopen <num>' to open a result link in lynx browser (if installed)"

@@ -1,0 +1,16 @@
+#!/bin/bash
+# help - the shit that tells u what u can even do here lol
+# cuz some peeps just stare at the prompt like "wtf now?"
+# this lists all the cmds we got, no fancy ass GUI tho, deal with it
+# protip: if ur command's not here, u probably fucked up or typed wrong
+
+echo "yo, here’s what VoidShellOS can do (for now):"
+
+# list all files in the cmds dir (the ones that do stuff)
+ls ./shell/cmds/ | sort
+
+echo -e "\nif u wanna add new cmds, just drop scripts here, noob"
+echo "or maybe fix ur typos first, seriously, some commands got weird names lol"
+echo "and dont bother bitchin if it breaks, this shit's still in alpha 🔥"
+
+# end of help, go git some coffee ☕ and stop messing with my code

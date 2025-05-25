@@ -1,8 +1,0 @@
-#!/bin/bash
-# this was working then it stopped showing last blk lol
-echo "[voidscan] Scanning memory blocks..."
-for i in {001..010}; do
-  echo "blk_$i: $(head -c 12 /dev/urandom | base64)"
-  sleep 0.2
-done
-echo "[voidscan] warning: blk_011 unreadable"

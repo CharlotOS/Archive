@@ -1,0 +1,14 @@
+#!/bin/bash
+# help command, lol don't touch the bottom
+
+echo "Available commands:"
+echo "  voidscan   - scan mem blocks (mostly works)"
+echo "  uplink     - test connection (sorta)"
+echo "  dumpsec    - run security dump (don’t)"
+echo "  vsearch    - text search tool"
+echo "  vnet       - text browser for local net"
+echo "  psimgr     - process mgr (kinda)"
+echo "  help       - show this"
+echo "  exit       - quit shell"
+
+# d said not to leak again here like before

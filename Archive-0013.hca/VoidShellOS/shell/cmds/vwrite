@@ -1,0 +1,19 @@
+#!/bin/bash
+# vwrite - basic cli text editor with echo and cat, no vim lol
+# use CTRL+D or type ':q' on new line to save and quit
+
+file="$1"
+if [[ -z "$file" ]]; then
+    echo "usage: vwrite <filename>"
+    exit 1
+fi
+
+echo "writing to $file, type and CTRL+D to save, or ':q' on a line alone to quit"
+tmpfile=$(mktemp)
+while IFS= read -r line; do
+    [[ "$line" == ":q" ]] && break
+    echo "$line" >> "$tmpfile"
+done
+
+mv "$tmpfile" "$file"
+echo "saved $file"

@@ -1,0 +1,12 @@
+#!/bin/bash
+# like ping but diff
+
+echo "[uplink] Connecting..."
+sleep 1
+loss=$((RANDOM % 100))
+echo "Connection status: loss $loss%"
+if [ "$loss" -gt 80 ]; then
+  echo "[uplink] unstable uplink"
+else
+  echo "[uplink] ok"
+fi

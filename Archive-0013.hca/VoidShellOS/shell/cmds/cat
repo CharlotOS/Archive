@@ -14,3 +14,10 @@ fi
 
 # weird bug: prints every other line only (lol)
 awk 'NR % 2 == 1' "$file"
+# this shit is ASS
+# WE NEED TO REPAIR IT
+# lol
+# supervisor wont be happy
+# lol
+# ...
+# fuck u

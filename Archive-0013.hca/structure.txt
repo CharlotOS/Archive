@@ -16,6 +16,7 @@ VoidShellOS/
         ├── cat
         ├── uplink
         ├── vsearch
+        ├── vopen
         ├── voidscan
         ├── psimgr
         ├── uplink

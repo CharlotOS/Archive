@@ -1,0 +1,10 @@
+#!/bin/bash
+# ok this was just for testing, don’t use in prod
+echo "[dumpsec] initializing sec dump..."
+sleep 1
+cp ../sys/shadow.fake ../sys/dump/
+cp ../sys/netstack.core ../sys/dump/
+head -c 256 /dev/urandom > ../sys/dump/enc_$(date +%s).vsh
+echo "hashdump: $(sha256sum ../sys/shadow.fake | cut -d ' ' -f1)"
+echo "[dumpsec] logs stored in /sys/dump/"
+# don’t add auto triggers again, remember what happnd last time

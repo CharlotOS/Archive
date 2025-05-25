@@ -1,0 +1,15 @@
+#!/bin/bash
+# voidscan - system info? kinda lol
+
+echo "voidshell system scan.. might crash lol"
+
+echo "uname info:"
+uname -a
+
+echo "disk usage, cuz why not:"
+df -h | head -6
+
+echo "memory info, prob buggy sometimes:"
+free -h 2>/dev/null || echo "no free cmd? wtf"
+
+echo "ok done, dont sue me if info is off lol"

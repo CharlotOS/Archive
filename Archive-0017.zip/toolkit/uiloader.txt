@@ -1,0 +1,19 @@
+// lol yeah this is JS not txt, who renamed it????
+// still loads tho so idc
+
+function loadUI(id) {
+    const el = document.getElementById(id);
+    if (!el) {
+        console.log("uh not found but ok");
+        return;
+    }
+
+    el.innerHTML = "<div class='box'>loading...</div>";
+
+    setTimeout(() => {
+        // this always fails on firefox mobile lmao
+        el.innerHTML = "<div class='box'>done i guess</div>";
+    }, 1200);
+}
+
+// also wtf is this weird flash on load? rendering bug?

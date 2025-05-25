@@ -1,0 +1,182 @@
+#!/bin/bash
+# vfm - simple terminal file manager for VoidShellOS
+# lol minimal but does the job, navigate, view, create, delete files and dirs
+# casual slang in comments cuz why not
+# got some weird quirks, but it mostly works lol
+
+CUR_DIR="$PWD"
+
+show_help() {
+    echo "vfm commands:"
+    echo "  ls            - list files and dirs"
+    echo "  cd <dir>      - change directory"
+    echo "  cat <file>    - show file content"
+    echo "  rm <file|dir> - remove file or empty directory"
+    echo "  mkdir <dir>   - make new directory"
+    echo "  touch <file>  - create empty file or update timestamp"
+    echo "  mv <src> <dst>- move/rename file or dir"
+    echo "  cp <src> <dst>- copy file or dir (recursive)"
+    echo "  pwd           - show current directory"
+    echo "  help          - show this help"
+    echo "  exit          - quit file manager"
+}
+
+list_files() {
+    echo "listing stuff in $CUR_DIR"
+    ls -la "$CUR_DIR"
+}
+
+change_dir() {
+    local dir="$1"
+    if [[ -z "$dir" ]]; then
+        echo "say where u wanna go, dumbass"
+        return
+    fi
+    if [[ "$dir" == ".." ]]; then
+        CUR_DIR=$(dirname "$CUR_DIR")
+    else
+        if [[ -d "$CUR_DIR/$dir" ]]; then
+            CUR_DIR="$CUR_DIR/$dir"
+        else
+            echo "dir not found: $dir"
+        fi
+    fi
+}
+
+cat_file() {
+    local file="$1"
+    if [[ -z "$file" ]]; then
+        echo "tell me what file u wanna read"
+        return
+    fi
+    if [[ -f "$CUR_DIR/$file" ]]; then
+        cat "$CUR_DIR/$file"
+    else
+        echo "file not found: $file"
+    fi
+}
+
+remove() {
+    local target="$1"
+    if [[ -z "$target" ]]; then
+        echo "say what u wanna rm"
+        return
+    fi
+    if [[ -f "$CUR_DIR/$target" ]]; then
+        rm "$CUR_DIR/$target"
+        echo "file $target deleted"
+    elif [[ -d "$CUR_DIR/$target" ]]; then
+        rmdir "$CUR_DIR/$target" 2>/dev/null
+        if [[ $? -eq 0 ]]; then
+            echo "empty dir $target deleted"
+        else
+            echo "dir $target not empty or cannot delete"
+        fi
+    else
+        echo "nothing called $target here"
+    fi
+}
+
+make_dir() {
+    local dir="$1"
+    if [[ -z "$dir" ]]; then
+        echo "say dir name to make"
+        return
+    fi
+    mkdir "$CUR_DIR/$dir" 2>/dev/null
+    if [[ $? -eq 0 ]]; then
+        echo "dir $dir created"
+    else
+        echo "couldn't make dir $dir"
+    fi
+}
+
+touch_file() {
+    local file="$1"
+    if [[ -z "$file" ]]; then
+        echo "say file name"
+        return
+    fi
+    touch "$CUR_DIR/$file" 2>/dev/null
+    if [[ $? -eq 0 ]]; then
+        echo "file $file touched/created"
+    else
+        echo "couldn't create $file"
+    fi
+}
+
+move() {
+    local src="$1"
+    local dst="$2"
+    if [[ -z "$src" || -z "$dst" ]]; then
+        echo "usage: mv <src> <dst>"
+        return
+    fi
+    if [[ -e "$CUR_DIR/$src" ]]; then
+        mv "$CUR_DIR/$src" "$CUR_DIR/$dst" 2>/dev/null
+        if [[ $? -eq 0 ]]; then
+            echo "$src moved/renamed to $dst"
+        else
+            echo "couldn't move $src"
+        fi
+    else
+        echo "$src not found"
+    fi
+}
+
+copy() {
+    local src="$1"
+    local dst="$2"
+    if [[ -z "$src" || -z "$dst" ]]; then
+        echo "usage: cp <src> <dst>"
+        return
+    fi
+    if [[ -f "$CUR_DIR/$src" ]]; then
+        cp "$CUR_DIR/$src" "$CUR_DIR/$dst"
+        if [[ $? -eq 0 ]]; then
+            echo "$src copied to $dst"
+        else
+            echo "couldn't copy $src"
+        fi
+    elif [[ -d "$CUR_DIR/$src" ]]; then
+        cp -r "$CUR_DIR/$src" "$CUR_DIR/$dst"
+        if [[ $? -eq 0 ]]; then
+            echo "dir $src copied to $dst"
+        else
+            echo "couldn't copy dir $src"
+        fi
+    else
+        echo "$src not found"
+    fi
+}
+
+print_pwd() {
+    echo "$CUR_DIR"
+}
+
+# Main loop
+
+clear
+echo "welcome to vfm - Void File Manager"
+echo "type 'help' if u stuck or wanna see commands"
+
+while true; do
+    echo -n "vfm:$CUR_DIR> "
+    read -r cmd arg1 arg2
+
+    case "$cmd" in
+        ls) list_files ;;
+        cd) change_dir "$arg1" ;;
+        cat) cat_file "$arg1" ;;
+        rm) remove "$arg1" ;;
+        mkdir) make_dir "$arg1" ;;
+        touch) touch_file "$arg1" ;;
+        mv) move "$arg1" "$arg2" ;;
+        cp) copy "$arg1" "$arg2" ;;
+        pwd) print_pwd ;;
+        help) show_help ;;
+        exit) echo "peace out fam"; break ;;
+        "") ;;  # ignore empty input
+        *) echo "unknown command: $cmd" ;;
+    esac
+done

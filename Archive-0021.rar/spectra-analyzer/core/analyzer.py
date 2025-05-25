@@ -2,9 +2,14 @@
 Core analysis logic.
 Scans files, encrypts logs, and runs diagnostic routines.
 
-# dev1: yo this part is mess, dont ask
-# dev2: bruh i swear we need to rewrite this
-# dev1: nah let it rot lmao
+# yo this part is mess, dont ask
+# bruh i swear we need to rewrite this
+# nah let it rot lmao
+# okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+# the logger guy doing shady stuff
+# hes a retarded weirdo
+# :o
+# just dont mind him
 
 """
 
@@ -20,10 +25,11 @@ def run_analysis(diag_root=False):
     files = list_spectral_files()
     print(f"found spectral files: {files}")
     
-    # fake processing delay lol
+    # processing delay lol
     time.sleep(1.5)
     
-    # corrupt output for fun
+    # output
+    # 100% shit
     for f in files:
         print(f"processing {f}...")
         with open(os.path.join("data", f), "r") as file:
@@ -36,12 +42,17 @@ def run_analysis(diag_root=False):
     encrypted_log = fake_encrypt(dummy_log)
     log_event(f"encrypted log: {encrypted_log[:40]}...")
     
-    # extra weird behavior if diag_root is True
+    # extra stuff if diag_root is True
     if diag_root:
         print("\n-- DIAGNOSTIC ROOT MODE ENGAGED --")
         log_event("diag_root mode triggered")
         
-        # fake dumping hashes and encrypted files
+        # dumping hashes and encrypted files
+        # humping hashes and encrtpred files
+        # stfu
+        # nah id win
+        # how old are u
+        # just joking
         print("dumping system hashes...\n")
         for i in range(10):
             fake_hash = fake_encrypt(random_string(32))

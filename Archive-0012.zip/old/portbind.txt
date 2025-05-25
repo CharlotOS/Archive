@@ -1,0 +1,15 @@
+# this one's Perl but like, why is it in .txt
+# also it opens port 4567 for... what?? never logs anything
+
+use IO::Socket;
+$socket = new IO::Socket::INET (
+    LocalPort => 4567,
+    Proto => 'tcp',
+    Listen => 5,
+    Reuse => 1
+);
+
+while($client = $socket->accept()) {
+    print $client "hello?\n";
+    close $client;
+}

@@ -1,18 +1,27 @@
 #!/bin/bash
-# calc - does math but not perfect lol
-# was gonna do floats but gave up
-# prob gonna crash if u do weird inputs lol
+# calc - math thing but now like.. if u divide by 0? BOOM 💥
+# lol whoever coded this last time forgot to block divide by 0
+# so now it just kills the shell, savage style lol
+# rule 37: you cant divide by 0
 
 expr="$*"
 if [[ -z "$expr" ]]; then
-    echo "calc what? gimme sumthin to calculate"
+    echo "yo u gotta type smth to calc"
     exit 1
 fi
 
-# only supports + - * / and integers
+# lazy parse to check if divide by 0 (yea janky, bite me)
+if echo "$expr" | grep -qE '/ *0($|[^0-9])'; then
+    echo "nah bro u just tried to divide by zero 💀"
+    echo "voidshell will now self-destruct, cya 👋"
+    sleep 1
+    kill -9 $$
+fi
+
+# calculate it w/ bc, no float support still
 result=$(echo "$expr" | bc 2>/dev/null)
 if [[ $? -ne 0 ]]; then
-    echo "calc error, maybe u typed weird shit"
+    echo "yo invalid math, brain.exe not found"
 else
     echo "$expr = $result"
 fi

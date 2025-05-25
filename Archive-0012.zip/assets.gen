@@ -1,0 +1,14 @@
+# nobody tell ops this is still live
+# it _does_ generate some weird junk in /tmp tho lol
+
+def make_asset(name)
+  path = "/tmp/#{name}_#{rand(999)}.dat"
+  File.open(path, "w") do |f|
+    f.write("asset_stuff_" + rand(10000).to_s)
+  end
+end
+
+make_asset("icon")
+make_asset("bg")
+
+puts "done??"

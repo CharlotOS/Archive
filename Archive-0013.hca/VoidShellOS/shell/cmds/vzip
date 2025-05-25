@@ -1,0 +1,26 @@
+#!/bin/bash
+# vzip - simple compress/decompress script (zip/unzip)
+# lol this is just a wrapper for system zip/unzip, no magic here
+
+if ! command -v zip >/dev/null 2>&1 || ! command -v unzip >/dev/null 2>&1; then
+    echo "install zip and unzip plz"
+    exit 1
+fi
+
+mode="$1"
+file="$2"
+
+usage() {
+    echo "usage: vzip <c|d> <file>"
+    echo " c = compress, d = decompress"
+    exit 1
+}
+
+if [[ "$mode" != "c" && "$mode" != "d" ]]; then usage; fi
+if [[ -z "$file" ]]; then usage; fi
+
+if [[ "$mode" == "c" ]]; then
+    zip "${file}.zip" "$file"
+elif [[ "$mode" == "d" ]]; then
+    unzip "$file"
+fi

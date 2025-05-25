@@ -1,0 +1,52 @@
+#!/bin/bash
+# vtar - simple tarball compressor/decompressor for VoidShellOS
+# lol wraps tar command to make pack/unpack easier
+
+usage() {
+    echo "usage: vtar <c|d> <file|dir|archive>"
+    echo " c = compress (tar.gz)"
+    echo " d = decompress (untar)"
+    exit 1
+}
+
+if [[ $# -lt 2 ]]; then
+    usage
+fi
+
+mode="$1"
+target="$2"
+
+if [[ "$mode" != "c" && "$mode" != "d" ]]; then
+    usage
+fi
+
+if [[ "$mode" == "c" ]]; then
+    # compress
+    if [[ ! -e "$target" ]]; then
+        echo "wtf? $target does not exist"
+        exit 1
+    fi
+    archive="${target%/}.tar.gz"  # remove trailing slash if any, add .tar.gz
+    echo "compressin $target to $archive ..."
+    tar -czf "$archive" "$target"
+    if [[ $? -eq 0 ]]; then
+        echo "done! created $archive"
+    else
+        echo "something went wrong compressin $target"
+        exit 1
+    fi
+elif [[ "$mode" == "d" ]]; then
+    # decompress
+    if [[ ! -f "$target" ]]; then
+        echo "wtf? $target not a file"
+        exit 1
+    fi
+    echo "extractin $target ..."
+    tar -xzf "$target"
+    if [[ $? -eq 0 ]]; then
+        echo "done! extracted $target"
+    else
+        echo "something went wrong extractin $target"
+        exit 1
+    fi
+fi

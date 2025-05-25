@@ -1,7 +1,7 @@
 """
-Fake encryptor module
+encryptor module
 
-# def not real encryption, just obfuscation
+# that shit doesnt wokr
 # used for logs and files, lol
 
 """
@@ -9,7 +9,8 @@ Fake encryptor module
 import base64
 
 def fake_encrypt(data):
-    # base64 + reverse string as dummy 'encryption'
+    # base64 + reverse string as dummy encryption
+    # crap
     encoded = base64.b64encode(data.encode("utf-8")).decode("utf-8")
     return encoded[::-1]
 

@@ -1,0 +1,33 @@
+#!/bin/bash
+# vopen - open webpage in terminal browser
+# needs lynx or w3m, fallback just cat webpage source
+
+num="$1"
+if [[ -z "$num" ]]; then
+    echo "usage: vopen <num>"
+    exit 1
+fi
+
+# get last query from vsearch log (crudely)
+if [[ ! -f /tmp/vsearch_results ]]; then
+    echo "no search results cached, run vsearch first"
+    exit 1
+fi
+
+url=$(sed -n "${num}p" /tmp/vsearch_results)
+
+if [[ -z "$url" ]]; then
+    echo "no such result number"
+    exit 1
+fi
+
+echo "opening $url..."
+
+if command -v lynx >/dev/null 2>&1; then
+    lynx "$url"
+elif command -v w3m >/dev/null 2>&1; then
+    w3m "$url"
+else
+    echo "lynx or w3m not found, showing raw html"
+    curl -s "$url"
+fi

@@ -20,4 +20,22 @@ VoidShellOS/
         ├── voidscan
         ├── psimgr
         ├── uplink
+        ├── pkgmgr
+        ├── vzip
+        ├── vmail
+        ├── vwrite
+        ├── vnotepad
+        ├── vclock
+        ├── vtar
+        ├── vfm
+        ├── help
+        ├── 
+        ├── 
+        ├── 
+        ├── 
+        ├── 
+        ├── 
+        ├── 
+        ├── 
+        ├── 
         └── help

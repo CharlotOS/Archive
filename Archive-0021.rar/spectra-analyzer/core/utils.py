@@ -1,5 +1,5 @@
 """
-Helpers for file operations and weird utils.
+this shit is so ass
 
 # been patching this since forever
 # sometimes it spits garbage, sometimes it works
@@ -10,7 +10,7 @@ import random
 import string
 
 def list_spectral_files():
-    # fake scanning for .spec files in data folder
+    # scanning for .spec files in data folder
     folder = "data"
     try:
         files = [f for f in os.listdir(folder) if f.endswith(".spec")]
@@ -27,7 +27,7 @@ def random_string(length=12):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 def corrupt_data(data):
-    # dumb corruption sim, flips some chars to nonsense
+    # dumb broken stuff
     res = []
     for c in data:
         if random.random() < 0.15:

@@ -1,26 +1,28 @@
 #!/bin/bash
-# vsearch - simple duckduckgo search in terminal
-# lol this one scrapes the html but doesnt parse it well yet
-# probs gonna break if ddg changes layout or w/e
+# vsearch - basic duckduckgo search + text browser-ish thing
+# lol this one actually fetches search results & tries to parse titles & links
+# very fragile tho, cuz ddg html can change anytime
 
 query="$*"
 if [[ -z "$query" ]]; then
-    echo "u gotta say what u wanna search for, duh"
+    echo "yo, gotta type what u wanna search for, duh"
     exit 1
 fi
 
 echo "searchin duckduckgo for: $query ..."
 sleep 1
 
-# Using curl to get raw html (very basic, no json API)
-result=$(curl -s "https://duckduckgo.com/html/?q=$(echo $query | sed 's/ /+/g')")
+# fetch ddg html
+html=$(curl -s "https://duckduckgo.com/html/?q=$(echo $query | sed 's/ /+/g')")
 
-if [[ -z "$result" ]]; then
-    echo "no results? net probs or ddg changed smth"
+if [[ -z "$html" ]]; then
+    echo "net probs or ddg changed layout, no results"
     exit 1
 fi
 
-# crude parsing: show lines with result links (very fragile)
-echo "$result" | grep -oP '(?<=<a class="result__a" href=").*?(?=")' | head -10
+# parse results titles & links crudely
+echo "top results:"
+echo "$html" | grep -oP '(?<=<a class="result__a" href=").*?(?=")' | head -10 | nl -w2 -s'. '
 
-echo "done, try openin links in browser (not here lol)"
+echo ""
+echo "use 'vopen <num>' to open a result link in lynx browser (if installed)"

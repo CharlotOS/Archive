@@ -4,8 +4,6 @@ import base64
 import random
 import string
 
-# Charlot Dev v0.2.4-stealthy
-# ----------------------------
 # // phase sync still acting weird, no clue why lol
 # // some patch half done, gonna break something for sure
 # // metaPhase? nah, prolly just a leftover feature

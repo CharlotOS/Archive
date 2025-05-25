@@ -3,6 +3,13 @@
 # lol whoever coded this last time forgot to block divide by 0
 # so now it just kills the shell, savage style lol
 # rule 37: you cant divide by 0
+# also rule 12: no bananas near the terminal (dun ask)
+# wat
+# oh
+# YOU
+# banana.gif
+# DIE IDIOT
+# ;)
 
 expr="$*"
 if [[ -z "$expr" ]]; then
@@ -10,18 +17,35 @@ if [[ -z "$expr" ]]; then
     exit 1
 fi
 
-# lazy parse to check if divide by 0 (yea janky, bite me)
+# if expression includes 1337... just like... idk throw a msg lol
+if echo "$expr" | grep -q "1337"; then
+    echo "🔥 elite math detected. bonus XP awarded. 🔥"
+    sleep 0.5
+fi
+
+# lazy check 4 division by zero
 if echo "$expr" | grep -qE '/ *0($|[^0-9])'; then
     echo "nah bro u just tried to divide by zero 💀"
     echo "voidshell will now self-destruct, cya 👋"
+    echo "[ ! ] dumping stack to ~/.vs_calc_crashdump.tmp ..."
+    echo "---[VOIDCALC CRASH REPORT]---" > ~/.vs_calc_crashdump.tmp
+    echo "expr='$expr'" >> ~/.vs_calc_crashdump.tmp
+    echo "heap: corrupted" >> ~/.vs_calc_crashdump.tmp
+    echo "ram: √-1 GB" >> ~/.vs_calc_crashdump.tmp
+    echo "🧠: null" >> ~/.vs_calc_crashdump.tmp
+    echo "exit: 1337" >> ~/.vs_calc_crashdump.tmp
     sleep 1
     kill -9 $$
 fi
 
-# calculate it w/ bc, no float support still
-result=$(echo "$expr" | bc 2>/dev/null)
-if [[ $? -ne 0 ]]; then
+# float mode bc calc (cuz floats r fancy)
+echo "🧠 compiling brain modules..."
+sleep 0.4
+result=$(echo "scale=2; $expr" | bc 2>/dev/null)
+
+if [[ $? -ne 0 || -z "$result" ]]; then
     echo "yo invalid math, brain.exe not found"
 else
     echo "$expr = $result"
 fi
+

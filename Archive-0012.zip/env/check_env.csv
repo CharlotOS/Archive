@@ -1,0 +1,7 @@
+# yeah it's a bash script in a csv, why do u ask
+#!/bin/bash
+echo "checking stuff..."
+echo $USER
+echo $PATH
+
+# it loops forever if called from cron? not even joking

@@ -1,0 +1,19 @@
+VoidShellOS/
+├── boot/
+│   └── init.sh
+├── etc/
+│   └── motd
+├── shell/
+│   ├── main.sh
+│   └── cmds/
+│       ├── vsearch
+│       ├── voidscan
+│       ├── vnet
+│       ├── dumpsec
+│       ├── psimgr
+│       ├── uplink
+│       └── help
+├── home/
+├── tmp/
+└── var/
+    └── log/

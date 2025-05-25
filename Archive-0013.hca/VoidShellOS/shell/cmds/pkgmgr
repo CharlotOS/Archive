@@ -1,0 +1,50 @@
+#!/bin/bash
+# pkgmgr - simple package manager, no deps, just add/remove/list
+# lol no repos, just manages ./packages directory
+# u can 'install' (copy) pkg scripts into shell/cmds and 'remove' em
+
+PACKDIR="./packages"
+CMDDIR="./shell/cmds"
+
+cmd="$1"
+pkgname="$2"
+
+usage() {
+    echo "usage: pkgmgr <install|remove|list> [pkgname]"
+    exit 1
+}
+
+if [[ -z "$cmd" ]]; then usage; fi
+
+case "$cmd" in
+    install)
+        if [[ -z "$pkgname" ]]; then
+            echo "install what, bruh?"
+            exit 1
+        fi
+        if [[ ! -d "$PACKDIR/$pkgname" ]]; then
+            echo "no such package in $PACKDIR"
+            exit 1
+        fi
+        echo "installin $pkgname..."
+        cp -r "$PACKDIR/$pkgname/"* "$CMDDIR/" 2>/dev/null
+        echo "done. now u can run its cmds from shell"
+        ;;
+    remove)
+        if [[ -z "$pkgname" ]]; then
+            echo "remove what, bruh?"
+            exit 1
+        fi
+        echo "removin $pkgname cmds..."
+        for f in "$CMDDIR"/$pkgname*; do
+            [[ -f "$f" ]] && rm "$f" && echo "removed $f"
+        done
+        ;;
+    list)
+        echo "installed packages:"
+        ls "$PACKDIR"
+        ;;
+    *)
+        usage
+        ;;
+esac

@@ -2,7 +2,7 @@
 # lol yeah this one finally "secure" now
 # not that anyone gonna use this irl 💀
 
-USER_DB="./etc/users.db"
+USER_DB="./etc/user.db"
 
 echo "== VoidShellOS Login =="
 read -p "Username: " username

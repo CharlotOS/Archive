@@ -1,0 +1,16 @@
+#!/bin/bash
+# cat - print file contents but watch out for weird bug lol
+
+file="$1"
+if [[ -z "$file" ]]; then
+    echo "cat what, bro? gimme a filename"
+    exit 1
+fi
+
+if [[ ! -f "$file" ]]; then
+    echo "file '$file' no exist or u suck at typing"
+    exit 1
+fi
+
+# weird bug: prints every other line only (lol)
+awk 'NR % 2 == 1' "$file"

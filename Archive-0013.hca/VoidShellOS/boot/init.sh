@@ -18,10 +18,10 @@ if [ ! -f "./shell/login.sh" ]; then
     exit 1
 fi
 
-if [ ! -f "./etc/users.db" ]; then
+if [ ! -f "./etc/user.db" ]; then
     echo "no user database? u serious?"
     exit 1
 fi
 
-# launch login screen, hands off from here
+# all good, launch login screen, hands off from here
 ./shell/login.sh

@@ -1,0 +1,14 @@
+#!/bin/bash
+# touch - creates a file, works like normal but chill
+
+file="$1"
+if [[ -z "$file" ]]; then
+    echo "touch what? need filename bro"
+    exit 1
+fi
+
+if [[ -e "$file" ]]; then
+    echo "yo '$file' already exists, whatever"
+else
+    > "$file" && echo "file '$file' created, nice"
+fi

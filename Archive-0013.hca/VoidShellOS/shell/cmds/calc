@@ -1,0 +1,18 @@
+#!/bin/bash
+# calc - does math but not perfect lol
+# was gonna do floats but gave up
+# prob gonna crash if u do weird inputs lol
+
+expr="$*"
+if [[ -z "$expr" ]]; then
+    echo "calc what? gimme sumthin to calculate"
+    exit 1
+fi
+
+# only supports + - * / and integers
+result=$(echo "$expr" | bc 2>/dev/null)
+if [[ $? -ne 0 ]]; then
+    echo "calc error, maybe u typed weird shit"
+else
+    echo "$expr = $result"
+fi

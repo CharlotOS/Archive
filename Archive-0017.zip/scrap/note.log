@@ -1,0 +1,14 @@
+-- not a real log lol
+-- it’s that experiment thing from last year
+
+local f = io.open("memo.txt", "w")
+f:write("ok this part works")
+
+-- crashes if "secret" file exists, not sure why
+if os.execute("dir secret") == 0 then
+  print("uhh skipping?")
+else
+  f:write("\nNo secret found")
+end
+
+f:close()

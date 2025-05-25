@@ -1,0 +1,30 @@
+#!/bin/bash
+# yeah bro this 1 actually does a real search, not bs like dumpsec
+# uses DDG cause no ads n stuff lol
+# i removed the shit that doesnt wokr
+# thx bro
+
+read -p "search wat? " q
+q_enc=$(echo "$q" | sed 's/ /+/g')
+
+echo "[lookup] pulling from web... wait up"
+
+res=$(curl -s "https://html.duckduckgo.com/html/?q=$q_enc" | grep -Eo '<a rel="nofollow" class="result__a" href="[^"]+"' | sed 's/^.*href="//;s/"$//' | head -n 5)
+
+[ -z "$res" ] && echo "💀 nothin found" && exit 1
+
+i=1
+for r in $res; do
+    echo "$i) $r"
+    i=$((i+1))
+done
+
+read -p "which? [1-5] " choice
+
+i=1
+for r in $res; do
+    [ "$i" = "$choice" ] && w3m "$r" && exit 0
+    i=$((i+1))
+done
+
+echo "nah not valid"

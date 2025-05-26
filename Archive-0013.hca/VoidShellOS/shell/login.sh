@@ -1,24 +1,17 @@
 #!/bin/bash
-# lol yeah this one finally "secure" now
-# not that anyone gonna use this irl 💀
+# lol passwordless login, who even needs security in a fake OS 💀
 
 USER_DB="./etc/user.db"
 
 echo "== VoidShellOS Login =="
 read -p "Username: " username
-read -s -p "Password: " password
-echo ""
 
-# hash pass
-pass_hash=$(echo -n "$password" | sha256sum | awk '{print $1}')
-
-# bruh this parsing ugly af
+# check if username exists (skip password)
 found=0
 while IFS= read -r line; do
     [[ "$line" =~ ^#.*$ ]] && continue
     u=$(echo "$line" | cut -d':' -f1)
-    h=$(echo "$line" | cut -d':' -f2)
-    if [[ "$username" == "$u" && "$pass_hash" == "$h" ]]; then
+    if [[ "$username" == "$u" ]]; then
         found=1
         break
     fi
@@ -29,6 +22,6 @@ if [[ "$found" -eq 1 ]]; then
     sleep 1
     ./shell/main.sh "$username"
 else
-    echo "nah wrong creds, try again"
+    echo "nah bro, user doesn't exist"
     exit 1
 fi

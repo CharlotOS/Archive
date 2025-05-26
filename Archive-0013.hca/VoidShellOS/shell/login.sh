@@ -6,10 +6,10 @@ USER_DB="./etc/user.db"
 echo "== VoidShellOS Login =="
 read -p "Username: " username
 
-# check if username exists (skip password)
+# check if username exists (skip password) (parsing ugly af bruh)
 found=0
 while IFS= read -r line; do
-    [[ "$line" =~ ^#.*$ ]] && continue
+    [[ "$line" =~ ^#.*$ ]] && continue # why does it do like its a comment?? tf?? bro??
     u=$(echo "$line" | cut -d':' -f1)
     if [[ "$username" == "$u" ]]; then
         found=1
